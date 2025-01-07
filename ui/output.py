@@ -53,15 +53,28 @@ def key(text: object):
 
 
 class SlowPrinter:
+    printed_strings: set[str] = set()
     @staticmethod
     def print(*args: object, sep: str = ' ', end: str = '\n') -> None:
         """Print something (or many things) slowly
         Works like the print function"""
+        # Check if it's in the set. If it is, print it normally.
         to_print = sep.join([str(x) for x in args]) + end
+        
+        # If it's been slow-printed before, just print it normally the second time.
+        if to_print in SlowPrinter.printed_strings:
+            delay = consts.quick_print_delay
+        else:
+            # Add the string to printed_strings so that it knows not to slow-print it again.
+            SlowPrinter.printed_strings.add(to_print)
+            delay = consts.slow_print_delay
+            
+        
         for character in to_print:
             print(character, end='', flush=True)
             if consts.slow_print_at_all:
-                sleep(consts.slow_print_delay)
+                sleep(delay)
+            
     
     @staticmethod
     def input(__prompt: str) -> str:
