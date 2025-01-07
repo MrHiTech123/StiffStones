@@ -10,7 +10,6 @@ class Room(PrintableObject):
                  f_east: function = lambda: True,
                  f_west: function = lambda: True,
                  f_interact: function = lambda: None):
-        super().__init__()
         self.name = f_name
         self.north = f_north
         self.south = f_south
@@ -27,7 +26,6 @@ class Room(PrintableObject):
 
 class Castle(PrintableObject):
     def __init__(self, width: int = 0, height: int = 0):
-        super().__init__()
         self.width = width
         self.height = height
         self.rooms = [[Room() for j in range(height)] for i in range(width)]

@@ -9,6 +9,8 @@ class PrintableObject():
 class SlowPrinter:
     @staticmethod
     def print(*args: object, sep: str = ' ', end: str = '\n') -> None:
+        """Print something (or many things) slowly
+        Works like the print function"""
         to_print = sep.join([str(x) for x in args]) + end
         for character in to_print:
             print(character, end='', flush=True)
@@ -16,6 +18,7 @@ class SlowPrinter:
     
     @staticmethod
     def input(__prompt: str) -> str:
+        """As SlowPrinter.print, but also takes an input"""
         SlowPrinter.print(__prompt, end='')
         return input()
 
