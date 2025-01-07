@@ -3,22 +3,22 @@ from consts import Direction
 import re
 
 
-class CommandClassifications(Enum):
+class CommandClassification(Enum):
     UNKNOWN = -1
     MOVE = 0
     ACTION = 1
     USAGE = 2
 
 
-def classify_command(command: str) -> CommandClassifications:
+def classify_command(command: str) -> CommandClassification:
     """Classifies a command into one of many categories so that it can be later parsed"""
     # If it matches the regex "use .* on .*":
     if re.search('use .* on .*', command):
-        return CommandClassifications.USAGE
+        return CommandClassification.USAGE
     elif command in tuple(Direction):
-        return CommandClassifications.MOVE
+        return CommandClassification.MOVE
     else:
-        return CommandClassifications.ACTION
+        return CommandClassification.ACTION
 
 def parse_usage_command(command: str) -> tuple:
     """Gives the item and target of a usage command"""

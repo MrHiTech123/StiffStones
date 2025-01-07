@@ -8,4 +8,3 @@ class Direction(StrEnum):
     EAST = 'east'
     SOUTH = 'south'
     WEST = 'west'
-
