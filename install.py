@@ -1,2 +1,3 @@
 import os
-os.system('pip install termcolor')
+
+os.system('pip install sty')

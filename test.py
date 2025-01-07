@@ -1,8 +1,5 @@
-from ui.output import SlowPrinter, thing
-
+import minigame
 
 if __name__ == '__main__':
-    SlowPrinter.print(1, 3, 'hello', end='\n')
-    name = SlowPrinter.input('Hello, enter your name: ')
-    
-    SlowPrinter.print("Hello,", thing(name))
+    started_fire = minigame.firestarter.run()
+
