@@ -1,6 +1,6 @@
 
 
-def linput(__prompt):
+def linput(__prompt=""):
     """Returns a lowercase inputted value"""
     return input(__prompt).lower()
 

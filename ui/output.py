@@ -8,8 +8,8 @@ class PrintableObject():
         return self.__str__()
 
 
-def colored(text: str, r: int, g: int, b: int) -> str:
-    return sty.fg.rgb_call(r, g, b) + text + sty.rs.fg
+def colored(text: object, r: int, g: int, b: int) -> str:
+    return sty.fg.rgb_call(r, g, b) + str(text) + sty.rs.fg
 
 
 def gradient(text: str, r1: int, g1: int, b1: int, r2: int, g2: int, b2: int) -> str:

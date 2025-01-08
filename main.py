@@ -1,8 +1,8 @@
-from castle import Castle, Room
+from wilderness import Wilderness, Area
 
-castle = Castle(2, 2)
+castle = Wilderness(2, 2)
 
-my_cool_room = Room('The foyer')
+my_cool_room = Area('The foyer')
 
 castle[1, 1] = my_cool_room
 

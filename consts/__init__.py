@@ -15,3 +15,5 @@ slow_print_at_all = True
 slow_print_delay = 0.03
 quick_print_delay = 0.01
 cheating_threshold = 0.05
+
+knapping_threshold = 1

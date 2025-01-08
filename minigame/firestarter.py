@@ -1,6 +1,7 @@
 from time import time, sleep
 from ui.input import linput, wait_for_continue
 from ui.output import colored, gradient, SlowPrinter, key
+from os import system
 import consts
 
 def get_flame_color(heat: int | float) -> tuple[int, int, int]:
@@ -9,7 +10,7 @@ def get_flame_color(heat: int | float) -> tuple[int, int, int]:
     return (min(heat * 2, 255), min(heat, 255), 0)
 
 def gameplay() -> int:
-    '''Controls the main gameplay. Returns the highest heat value the player reached.'''
+    """Controls the main gameplay. Returns the highest heat value the player reached."""
     heat = 0
     start = time()
     while time() - start < consts.cheating_threshold:
@@ -17,7 +18,6 @@ def gameplay() -> int:
     
     # Tracks the highest temperature the player got
     highest_heat = 0
-    # Tracks the smallest amount of elapsed time 
     
     while True:
         choice = input(colored('. ', *get_flame_color(heat)))
@@ -53,7 +53,8 @@ def gameplay() -> int:
 def heat_to_celsius(heat: float) -> float:
     return consts.heat_conversion * heat
 
-def run() -> bool:
+def run(player) -> bool:
+    system('clear')
     SlowPrinter.print(f"You temporarily make a primitive hand drill from a couple of your sticks. \n"
                       f"To start a fire, rub the wood together by repeatedly pressing the {key('Enter')} key.\n"
                       f"Be sure to do it quickly so that you can build up enough heat.\n"
@@ -70,7 +71,7 @@ def run() -> bool:
     elif highest_heat < 0:
         print(gradient('SNAP!', 128, 128, 64, 64, 64, 32))
         sleep(1)
-        SlowPrinter.print("You rub the sticks so violently that one of them shatters!\n"
+        SlowPrinter.print("You rub the sticks so quickly that you accidentally break one of them!\n"
                           "-1 stick.\n"
                           "(This is an anti-cheating measure. If you "
                           "got this message legitimately, hats off to you.)")

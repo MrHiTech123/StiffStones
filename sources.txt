@@ -2,3 +2,4 @@ https://stackoverflow.com/questions/7942669/create-a-python-object-that-can-be-a
 https://www.w3schools.com/python/python_regex.asp
 https://stackoverflow.com/questions/735975/static-methods-in-python
 https://docs.python.org/3/library/enum.html
+https://stackoverflow.com/questions/49427944/type-hints-for-sized-iterable-in-python

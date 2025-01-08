@@ -1,1 +1,1 @@
-import minigame.firestarter
+import minigame.firestarter, minigame.knapping
