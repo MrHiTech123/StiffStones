@@ -1,34 +1,15 @@
 from ui.output import PrintableObject
+from wilderness.area import Area
 from consts import function
 
 
-class Area(PrintableObject):
-    def __init__(self,
-                 f_name: str = "unnamed",
-                 f_north: function = lambda: True,
-                 f_south: function = lambda: True,
-                 f_east: function = lambda: True,
-                 f_west: function = lambda: True,
-                 f_interact: function = lambda: None):
-        self.name = f_name
-        self.north = f_north
-        self.south = f_south
-        self.east = f_east
-        self.west = f_west
-        self.interact = f_interact
-    
-    def __str__(self):
-        return f'Room {self.name}'
-    
-    def display(self):
-        return self.name
 
 
 class Wilderness(PrintableObject):
     def __init__(self, width: int = 0, height: int = 0):
         self.width = width
         self.height = height
-        self.rooms = [[Area() for j in range(height)] for i in range(width)]
+        self.rooms = [[Area(self) for j in range(height)] for i in range(width)]
     
     def __str__(self) -> str:
         """When printing, print each room out in its row,

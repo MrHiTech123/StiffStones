@@ -1,4 +1,5 @@
 from enum import StrEnum
+import consts.player
 
 function = type(lambda: None)
 

@@ -8,6 +8,7 @@ class CommandClassification(Enum):
     MOVE = 0
     ACTION = 1
     USAGE = 2
+    ITEM_COMBINE = 2
 
 
 def classify_command(command: str) -> CommandClassification:
@@ -15,6 +16,8 @@ def classify_command(command: str) -> CommandClassification:
     # If it matches the regex "use .* on .*":
     if re.search('use .* on .*', command):
         return CommandClassification.USAGE
+    elif re.search('use .* with .*', command):
+        return CommandClassification.ITEM_COMBINE
     elif command in tuple(Direction):
         return CommandClassification.MOVE
     else:

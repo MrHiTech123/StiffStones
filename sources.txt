@@ -3,3 +3,4 @@ https://www.w3schools.com/python/python_regex.asp
 https://stackoverflow.com/questions/735975/static-methods-in-python
 https://docs.python.org/3/library/enum.html
 https://stackoverflow.com/questions/49427944/type-hints-for-sized-iterable-in-python
+https://stackoverflow.com/questions/33837918/type-hints-solve-circular-dependency

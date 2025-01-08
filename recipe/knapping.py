@@ -9,7 +9,7 @@ class KnappingRecipe(NamedTuple):
 recipes = [
     KnappingRecipe('spear_head', (6, 3, 2, 1)),
     KnappingRecipe('axe_head', (5, 5, 3, 3)),
-    KnappingRecipe('knife_head', (1, 1, 1, 1))
+    KnappingRecipe('knife_head', (2, 2, 2, 2))
 ]
 
 registry = {}
