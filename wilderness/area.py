@@ -1,15 +1,16 @@
 from player import Player
-from ui.output import PrintableObject
+from ui.output import PrintableObject, SlowPrinter
 from random import randint
 
 
 class Area(PrintableObject):
-    def __init__(self, wilderness: 'Wilderness', f_name: str = "unnamed", f_inventory: dict[str: int] = None):
-        self.name = f_name
+    def __init__(self, wilderness: 'Wilderness', name: str = "unnamed", inventory: dict[str: int] = None, features: set[str] = None):
+        self.name = name
         
-        if f_inventory == None:
-            f_inventory = {}
-        self.inventory = f_inventory
+        if inventory == None:
+            inventory = {}
+        self.inventory = inventory
+        self.features  = features
     
     def north(self, player: Player):
         return True
@@ -23,9 +24,13 @@ class Area(PrintableObject):
     def west(self, player: Player):
         return True
     
-    def enter(self, player: Player):
-        for item, amount in self.inventory.items():
-            player.get_item(item, amount)
+    def be_entered_by(self, player: Player):
+        if self.inventory:
+            SlowPrinter.print("This area contains the following items, which you pick up:")
+            for item, amount in self.inventory.items():
+                SlowPrinter.print(f"\t{item}\t{amount}")
+                player.get_item(item, amount)
+        self.inventory.clear()
         return True
     
     def interact(self, player: Player):

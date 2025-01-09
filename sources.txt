@@ -4,3 +4,6 @@ https://stackoverflow.com/questions/735975/static-methods-in-python
 https://docs.python.org/3/library/enum.html
 https://stackoverflow.com/questions/49427944/type-hints-for-sized-iterable-in-python
 https://stackoverflow.com/questions/33837918/type-hints-solve-circular-dependency
+https://stackoverflow.com/questions/238073/how-to-add-a-progress-bar-to-a-shell-script
+https://stackoverflow.com/questions/7173850/how-to-stop-the-input-function-from-inserting-a-new-line
+https://gist.github.com/ConnerWill/d4b6c776b509add763e17f9f113fd25b

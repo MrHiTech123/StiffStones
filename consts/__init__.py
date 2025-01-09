@@ -1,5 +1,5 @@
 from enum import StrEnum
-import consts.player
+import consts.player, consts.escape_code, consts.wilderness
 
 function = type(lambda: None)
 

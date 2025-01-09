@@ -1,3 +1,4 @@
+from os import system
 from time import sleep
 import sty
 import consts
@@ -41,7 +42,7 @@ def gradient(text: str, r1: int, g1: int, b1: int, r2: int, g2: int, b2: int) ->
 
 
 def thing(text: object) -> str:
-    """Makes text lime green
+    """Makes text light green
     Name is a reference to the API of the Patchouli Minecraft mod, which also uses
     "Thing" to mean, "turn this light green" """
     return colored(text, 0, 255, 0)
@@ -53,7 +54,7 @@ def key(text: object):
 
 
 class SlowPrinter:
-    printed_strings: set[str] = set()
+    __printed_strings__: set[str] = set()
     @staticmethod
     def print(*args: object, sep: str = ' ', end: str = '\n') -> None:
         """Print something (or many things) slowly
@@ -62,11 +63,11 @@ class SlowPrinter:
         to_print = sep.join([str(x) for x in args]) + end
         
         # If it's been slow-printed before, just print it normally the second time.
-        if to_print in SlowPrinter.printed_strings:
+        if to_print in SlowPrinter.__printed_strings__:
             delay = consts.quick_print_delay
         else:
             # Add the string to printed_strings so that it knows not to slow-print it again.
-            SlowPrinter.printed_strings.add(to_print)
+            SlowPrinter.__printed_strings__.add(to_print)
             delay = consts.slow_print_delay
             
         
@@ -87,9 +88,13 @@ class SlowPrinter:
         return SlowPrinter.input(__prompt).lower()
 
 
-def test_green():
-    SlowPrinter.print(
-        f"Objects you can interact with will be typed in {thing('Green')}.\n"
-        f"Keys you can press will be typed in {key('Blue')}."
-        f"If \"Green\" and \"Blue\" are not written in their respective colors,"
-        f"something is wrong with your terminal environment.")
+def test_effects():
+    system('clear')
+    SlowPrinter.print(thing('This text should be printed in Green'))
+    SlowPrinter.print(key('This text should be printed in Yellow'))
+    
+    SlowPrinter.print('This sentence should be overwritten.')
+    sleep(1)
+    print(consts.escape_code.start_prev_line, end='')
+    SlowPrinter.print("If any of that didn't happen, your terminal environment is not set up properly for this game.")
+    

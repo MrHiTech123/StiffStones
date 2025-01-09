@@ -1,5 +1,5 @@
 from time import time, sleep
-from ui.input import linput, wait_for_continue
+from ui.input import enter_press, wait_for_continue
 from ui.output import colored, gradient, SlowPrinter, key
 from os import system
 import consts
@@ -20,7 +20,7 @@ def gameplay() -> int:
     highest_heat = 0
     
     while True:
-        choice = input(colored('. ', *get_flame_color(heat)))
+        choice = enter_press(colored('. ', *get_flame_color(heat)))
         
         if choice == 'exit':
             break

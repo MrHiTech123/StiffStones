@@ -2,9 +2,12 @@ import consts.player
 from ui.output import PrintableObject
 
 class Player(PrintableObject):
-    def __init__(self, name: str, health=consts.player.health, inventory = None):
+    def __init__(self, wilderness: "Wilderness", coordinates: list[int, int], name: str = "NoName", health: int=consts.player.health, inventory: dict[str: int] = None):
         self.name = name
+        self.wilderness = wilderness
+        self.coordinates = coordinates
         
+        self.health = health
         if inventory == None:
             inventory = {}
         self.inventory = inventory
@@ -29,3 +32,7 @@ class Player(PrintableObject):
             return False
         self.inventory[item] -= amount
         return True
+    
+    def enter(self, area: "Area"):
+        return area.be_entered_by(self)
+        
