@@ -11,6 +11,9 @@ class Player(PrintableObject):
         if inventory == None:
             inventory = {}
         self.inventory = inventory
+        
+        self.enter(wilderness[1, 1])
+        
     
     def __str__(self):
         to_return = ''
@@ -35,4 +38,9 @@ class Player(PrintableObject):
     
     def enter(self, area: "Area"):
         return area.be_entered_by(self)
-        
+    
+    def move(self, direction: consts.Direction):
+        coordinate_adjust = consts.coordinate_adjusts[direction]
+        for i in range(2):
+            self.coordinates[i] += coordinate_adjust[i]
+        self.enter(self.wilderness[self.coordinates])

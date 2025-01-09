@@ -9,8 +9,10 @@ class Area(PrintableObject):
         
         if inventory == None:
             inventory = {}
+        if features == None:
+            features = set()
         self.inventory = inventory
-        self.features  = features
+        self.features = features
     
     def north(self, player: Player):
         return True
@@ -52,4 +54,15 @@ class ClearingArea(Area):
             'rock': randint(1, 4),
             'stick': randint(1, 3)
         }
-        
+
+class ForestArea(Area):
+    def __init__(self, wilderness: 'Wilderness'):
+        super().__init__(wilderness, 'Forest', ForestArea.random_inventory())
+    
+    @staticmethod
+    def random_inventory():
+        return {
+            'stick': randint(1, 10)
+        }
+    
+    

@@ -1,3 +1,5 @@
+import typing
+
 from ui.output import PrintableObject
 from wilderness.area import Area
 from consts import function
@@ -24,7 +26,7 @@ class Wilderness(PrintableObject):
     def __getitem__(self, coords: tuple) -> Area:
         """Causes wilderness[x, y] to return wilderness.rooms[x][y]
         Yes, this is actually how you're supposed to do it."""
-        if type(coords) != tuple:
+        if not isinstance(coords, typing.Iterable):
             raise TypeError(f"Expected tuple, got {type(coords)}.\n"
                             f"If you're getting this error, you likely entered the wrong number of arguments to "
                             f"wilderness[x, y].")
