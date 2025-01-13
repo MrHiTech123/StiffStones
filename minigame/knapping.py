@@ -37,7 +37,7 @@ def run(player) -> bool:
                       f"After each number, you must press the {key('Enter')} key "
                       "that many seconds after it appears.\n"
                       f"For example, if a \"3\" appears, you must wait 3 seconds and then press {key('Enter')}.\n"
-                      f"This represents you hitting the rock.\n"
+                      f"This represents you hitting the rock precisely.\n"
                       f"After each hit, the next number will appear.")
     
     SlowPrinter.print("What item would you like to knap? You may choose from:")
@@ -53,7 +53,6 @@ def run(player) -> bool:
             break
         SlowPrinter.print("Invalid item. Please try again.")
     
-    # take rock from player
     
     SlowPrinter.input(f"Knapping {chosen_item}. Press {thing('Enter')} to begin.")
     
@@ -61,7 +60,7 @@ def run(player) -> bool:
     
     if to_return:
         SlowPrinter.print(f'Successfully knapped {chosen_item}')
-        # Give item to player
+        player.get_item(chosen_item)
     else:
         SlowPrinter.print('Knapping failure')
     

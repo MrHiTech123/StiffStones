@@ -7,3 +7,4 @@ https://stackoverflow.com/questions/33837918/type-hints-solve-circular-dependenc
 https://stackoverflow.com/questions/238073/how-to-add-a-progress-bar-to-a-shell-script
 https://stackoverflow.com/questions/7173850/how-to-stop-the-input-function-from-inserting-a-new-line
 https://gist.github.com/ConnerWill/d4b6c776b509add763e17f9f113fd25b
+https://stackoverflow.com/questions/68804209/how-to-do-an-else-default-in-match-case

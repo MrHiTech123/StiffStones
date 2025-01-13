@@ -14,11 +14,11 @@ if __name__ == '__main__':
     wilderness[1, 1] = ClearingArea(wilderness)
     wilderness[1, 2] = ForestArea(wilderness)
     player = Player(wilderness, [1, 1], 'MrHiTech', consts.player.health)
-    
-    SlowPrinter.print(player)
 
-    player.move(consts.Direction.EAST)
-            
+    SlowPrinter.print(player)
+    
+    player.do_command("move east")
+    player.do_command("use rock with rock")
     SlowPrinter.print(player)
     
 

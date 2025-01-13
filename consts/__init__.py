@@ -10,15 +10,18 @@ class Direction(StrEnum):
     SOUTH = 'south'
     WEST = 'west'
 
+
+direction_from_string: dict[str: Direction] = {k.value: k for k in tuple(Direction)}
+
 coordinate_adjusts = {
     Direction.NORTH: (-1, 0),
     Direction.WEST: (0, -1),
     Direction.SOUTH: (1, 0),
     Direction.EAST: (0, 1)
 }
-heat_conversion = 5/2
+heat_conversion = 5 / 2
 
-slow_print_at_all = True
+slow_print_at_all = False
 slow_print_delay = 0.03
 quick_print_delay = 0.01
 cheating_threshold = 0.05

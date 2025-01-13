@@ -1,4 +1,5 @@
 from typing import NamedTuple, Collection
+from ui.output import SlowPrinter
 
 
 class KnappingRecipe(NamedTuple):
@@ -16,4 +17,9 @@ registry = {}
 
 for recipe in recipes:
     registry[recipe.result] = recipe
-    
+
+def get(result: str):
+    if result in recipes:
+        return recipes[result]
+    else:
+        SlowPrinter.print(f"Error: No knapping recipe for {result}")

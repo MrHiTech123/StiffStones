@@ -1,1 +1,1 @@
-import recipe.knapping
+import recipe.crafting, recipe.knapping
