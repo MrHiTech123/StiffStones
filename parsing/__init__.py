@@ -1,6 +1,7 @@
 from enum import Enum
 
 import consts
+import recipe.actions
 from consts import Direction
 import re
 
@@ -16,7 +17,7 @@ class CommandClassification(Enum):
 def classify_command(command: str) -> CommandClassification:
     """Classifies a command into one of many categories so that it can be later parsed"""
     # If it matches the regex "use \S* on \S+":
-    if command in consts.actions:
+    if command in recipe.actions.actions:
         return CommandClassification.ACTION
     elif re.match('use \\S+ on \\S+', command):
         return CommandClassification.USAGE
@@ -41,8 +42,10 @@ def parse_move_command(command: str) -> tuple:
     if words[1] in consts.direction_from_string:
         return CommandClassification.MOVE, consts.direction_from_string[words[1]]
     else:
-        return CommandClassification.UNKNOWN, command
+        return (CommandClassification.UNKNOWN,)
 
+def parse_action_command(command: str) -> tuple:
+    return (CommandClassification.ACTION, )
 def parse_unknown_command(command: str) -> tuple:
     return (CommandClassification.UNKNOWN, )
 
@@ -55,6 +58,8 @@ def parse_command(command: str) -> tuple:
             return parse_item_combine_command(command)
         case CommandClassification.MOVE:
             return parse_move_command(command)
+        case CommandClassification.ACTION:
+            return parse_action_command(command)
         case _:
             return parse_unknown_command(command)
     

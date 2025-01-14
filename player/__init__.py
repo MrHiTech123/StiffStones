@@ -2,7 +2,8 @@ import consts.player
 import parsing
 import recipe
 from os import system
-from ui.output import PrintableObject, SlowPrinter
+from ui.output import PrintableObject, SlowPrinter, item
+
 
 
 class Player(PrintableObject):
@@ -17,12 +18,12 @@ class Player(PrintableObject):
             inventory = {}
         self.inventory = inventory
         
-        self.enter(wilderness[1, 1])
+        self.enter(wilderness[self.coordinates])
     
     def display_inventory(self):
         to_return = 'Inventory:\n'
-        for item, amount in self.inventory.items():
-            to_return += f'\t{item}\t{amount}\n'
+        for item_type, amount in self.inventory.items():
+            to_return += f'\t{item(item_type)}\t{amount}\n'
         return to_return
     
     def __str__(self):
@@ -31,6 +32,9 @@ class Player(PrintableObject):
         to_return += f"Coords: {self.coordinates}\n"
         to_return += self.display_inventory()
         return to_return
+    
+    def get_current_area(self) -> "Area":
+        return self.wilderness[self.coordinates]
     
     def get_item(self, item: str, amount: int = 1) -> None:
         if item not in self.inventory:
@@ -68,16 +72,16 @@ class Player(PrintableObject):
             SlowPrinter.print("Cannot go further West")
             self.coordinates[1] = 0
         
-        self.enter(self.wilderness[self.coordinates])
+        self.enter(self.get_current_area())
     
     def do_action_command(self, action):
-        if action not in consts.actions:
+        if action not in recipe.actions.actions:
             return None
-        return consts.actions[action](self)
+        return recipe.actions.actions[action](self)
     
     def do_usage_command(self, item, feature):
         SlowPrinter.print(f"Using {item} on {feature}")
-        area = self.wilderness[self.coordinates]
+        area = self.get_current_area()
         if item not in self.inventory:
             SlowPrinter.print("Error: Insufficient materials")
             return
@@ -110,7 +114,7 @@ class Player(PrintableObject):
     
     def do_move_command(self, direction: consts.Direction):
         SlowPrinter.print(f"Moving {direction.value}")
-        if self.wilderness[self.coordinates].move(self, direction):
+        if self.get_current_area().move(self, direction):
             self.move(direction)
     
     def do_unknown_command(self, command):
@@ -136,6 +140,8 @@ class Player(PrintableObject):
     def command_prompt(self):
         SlowPrinter.print(self.name)
         SlowPrinter.print(self.display_inventory())
+        SlowPrinter.print(self.get_current_area())
+        SlowPrinter.print(self.get_current_area().display_features())
         
         command = SlowPrinter.linput("Enter command:\n")
         return self.do_command(command)

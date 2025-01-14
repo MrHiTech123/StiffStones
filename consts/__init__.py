@@ -38,9 +38,5 @@ cheating_threshold = 0.05
 
 knapping_threshold = 1
 
-def simple(result: str):
-    return lambda x: result
-actions = {
-    'exit': simple('exit')
-}
+
 

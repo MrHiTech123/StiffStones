@@ -1,1 +1,1 @@
-import recipe.crafting, recipe.knapping, recipe.usage
+import recipe.actions, recipe.crafting, recipe.knapping, recipe.usage
