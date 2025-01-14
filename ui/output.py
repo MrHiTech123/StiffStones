@@ -10,10 +10,12 @@ class PrintableObject():
 
 
 def colored(text: object, r: int, g: int, b: int) -> str:
+    """Prints text, colored rgb"""
     return sty.fg.rgb_call(r, g, b) + str(text) + sty.rs.fg
 
 
 def gradient(text: str, r1: int, g1: int, b1: int, r2: int, g2: int, b2: int) -> str:
+    """Prints text in a gradient. The starting color is (r1, g1, b1), and the ending color is (r2, g2, b2)."""
     to_return = ''
     # Get the step size
     size = len(text)
@@ -41,15 +43,16 @@ def gradient(text: str, r1: int, g1: int, b1: int, r2: int, g2: int, b2: int) ->
     return to_return
 
 
-def thing(text: object) -> str:
-    """Makes text light green
-    Name is a reference to the API of the Patchouli Minecraft mod, which also uses
-    "Thing" to mean, "turn this light green" """
+def item(text: object) -> str:
+    """Makes text light green indicates that the subject of the text is a feature."""
     return colored(text, 0, 255, 0)
 
+def feature(text: object) -> str:
+    """Makes text light blue, indicates that the subject of the text is a feature."""
+    return colored(text, 128, 128, 255)
 
 def key(text: object):
-    """Makes text light blue, indicates that the subject of the text is a control"""
+    """Makes text yellow, indicates that the subject of the text is a control"""
     return colored(text, 255, 255, 0)
 
 
@@ -85,13 +88,17 @@ class SlowPrinter:
     
     @staticmethod
     def linput(__prompt: str):
+        """As SlowPrinter.input, but returns the lowercase version"""
         return SlowPrinter.input(__prompt).lower()
 
 
+
 def test_effects():
+    """Confirms to the user that their terminal is set up properly"""
     system('clear')
-    SlowPrinter.print(thing('This text should be printed in Green'))
-    SlowPrinter.print(key('This text should be printed in Yellow'))
+    SlowPrinter.print(item('This text should be printed in Green.'))
+    SlowPrinter.print(feature("This text should be written in Light Blue."))
+    SlowPrinter.print(key('This text should be printed in Yellow.'))
     
     SlowPrinter.print('This sentence should be overwritten.')
     sleep(1)

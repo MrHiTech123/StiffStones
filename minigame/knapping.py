@@ -1,6 +1,6 @@
 import recipe
 from ui.input import linput
-from ui.output import SlowPrinter, key, thing
+from ui.output import SlowPrinter, key, item
 from typing import Collection
 from time import time
 import consts
@@ -42,7 +42,7 @@ def run(player) -> bool:
     
     SlowPrinter.print("What item would you like to knap? You may choose from:")
     for item_name in recipe.knapping.registry:
-        SlowPrinter.print('\t' + thing(item_name))
+        SlowPrinter.print('\t' + item(item_name))
     SlowPrinter.print("Or type \"exit\" to exit")
     
     while True:
@@ -54,7 +54,7 @@ def run(player) -> bool:
         SlowPrinter.print("Invalid item. Please try again.")
     
     
-    SlowPrinter.input(f"Knapping {chosen_item}. Press {thing('Enter')} to begin.")
+    SlowPrinter.input(f"Knapping {chosen_item}. Press {item('Enter')} to begin.")
     
     to_return = gameplay(chosen_item)
     

@@ -13,5 +13,8 @@ def simple(result: str):
 
 recipes = {
     ("rock", "rock"): minigame.knapping.run,
-    ("stick", "stick"): simple("firestarter")
+    ("stick", "axe_head"): simple("axe"),
+    ("stick", "knife_head"): simple("knife"),
+    ("stick", "spear_head"): simple("spear"),
+    ("stick", "wood"): minigame.firestarter.run
 }

@@ -15,12 +15,12 @@ class CommandClassification(Enum):
 
 def classify_command(command: str) -> CommandClassification:
     """Classifies a command into one of many categories so that it can be later parsed"""
-    # If it matches the regex "use .* on .*":
-    if re.match('use \S+ on \S+', command):
+    # If it matches the regex "use \S* on \S+":
+    if re.match('use \\S+ on \\S+', command):
         return CommandClassification.USAGE
-    elif re.match('use \S+ with \S+', command):
+    elif re.match('use \\S+ with \\S+', command):
         return CommandClassification.ITEM_COMBINE
-    elif re.match('move \S+', command):
+    elif re.match('move \\S+', command):
         return CommandClassification.MOVE
     else:
         return CommandClassification.UNKNOWN

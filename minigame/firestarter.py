@@ -53,6 +53,10 @@ def gameplay() -> int:
 def heat_to_celsius(heat: float) -> float:
     return consts.heat_conversion * heat
 
+def reward(player: "Player"):
+    area = player.wilderness[player.coordinates]
+    area.add_feature('campfire')
+
 def run(player) -> bool:
     system('clear')
     SlowPrinter.print(f"You temporarily make a primitive hand drill from a couple of your sticks. \n"
@@ -67,6 +71,7 @@ def run(player) -> bool:
         sleep(1)
         SlowPrinter.print("You have successfully started a fire!\n\n")
         wait_for_continue()
+        reward(player)
         return True
     elif highest_heat < 0:
         print(gradient('SNAP!', 128, 128, 64, 64, 64, 32))
@@ -81,6 +86,7 @@ def run(player) -> bool:
         SlowPrinter.print("Your hand drill did not reach a high enough temperature this time, "
                 "since it only reached a temperature of {:.2f}°C.".format(highest_temp))
         return False
+
 
 
 if __name__ == '__main__':

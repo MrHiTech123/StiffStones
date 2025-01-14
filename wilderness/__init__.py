@@ -1,7 +1,7 @@
 import typing
 
 from ui.output import PrintableObject
-from wilderness.area import Area
+from wilderness.area import Area, rand_area_type
 from consts import function
 
 
@@ -9,9 +9,9 @@ from consts import function
 
 class Wilderness(PrintableObject):
     def __init__(self, width: int = 0, height: int = 0):
-        self.width = width
-        self.height = height
-        self.rooms = [[Area(self) for j in range(height)] for i in range(width)]
+        self.width: int = width
+        self.height: int = height
+        self.rooms: list[list[area]] = [[rand_area_type()(self) for j in range(height)] for i in range(width)]
     
     def __str__(self) -> str:
         """When printing, print each room out in its row,
@@ -19,7 +19,7 @@ class Wilderness(PrintableObject):
         to_return = ''
         for r in range(self.height):
             for c in range(self.width):
-                to_return += (str(self.rooms[r][c]) + '   ')
+                to_return += (str(self.rooms[r][c]) + '\t')
             to_return += '\n'
         return to_return
     
