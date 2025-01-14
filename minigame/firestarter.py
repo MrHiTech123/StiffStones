@@ -59,8 +59,8 @@ def reward(player: "Player"):
 
 def run(player) -> bool:
     system('clear')
-    SlowPrinter.print(f"You temporarily make a primitive hand drill from a couple of your sticks. \n"
-                      f"To start a fire, rub the wood together by repeatedly pressing the {key('Enter')} key.\n"
+    SlowPrinter.print(f"You make a primitive hand drill. \n"
+                      f"To start a fire, rub the wood and stick together by repeatedly pressing the {key('Enter')} key.\n"
                       f"Be sure to do it quickly so that you can build up enough heat.\n"
                       f"You can also exit at any time by typing \"exit\".")
     highest_heat = gameplay()
@@ -76,12 +76,13 @@ def run(player) -> bool:
     elif highest_heat < 0:
         print(gradient('SNAP!', 128, 128, 64, 64, 64, 32))
         sleep(1)
-        SlowPrinter.print("You rub the sticks so quickly that you accidentally break one of them!\n"
+        SlowPrinter.print("You rub the stick so quickly that you accidentally break it!\n"
                           "-1 stick.\n"
                           "(This is an anti-cheating measure. If you "
                           "got this message legitimately, hats off to you.)")
         # TODO: Player loses stick
         wait_for_continue()
+        return False
     else:
         SlowPrinter.print("Your hand drill did not reach a high enough temperature this time, "
                 "since it only reached a temperature of {:.2f}°C.".format(highest_temp))

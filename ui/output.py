@@ -97,11 +97,25 @@ def test_effects():
     """Confirms to the user that their terminal is set up properly"""
     system('clear')
     SlowPrinter.print(item('This text should be printed in Green.'))
-    SlowPrinter.print(feature("This text should be written in Light Blue."))
+    SlowPrinter.print(feature("This text should be printed in Light Blue."))
     SlowPrinter.print(key('This text should be printed in Yellow.'))
     
     SlowPrinter.print('This sentence should be overwritten.')
     sleep(1)
     print(consts.escape_code.start_prev_line, end='')
     SlowPrinter.print("If any of that didn't happen, your terminal environment is not set up properly for this game.")
+    
+def tutorial():
+    system('clear')
+    SlowPrinter.print(f"{item('Green')} text indicates items that can be stored in your inventory, such as rocks and sticks.\n"
+                      f"{feature('Blue')} text indicates features that can be stored in areas, such as trees and campfires."
+                      f"{key('Yellow')} indicates keys you can press on your keyboard.")
+    
+    SlowPrinter.print("To do things, enter the following types of commands:")
+    SlowPrinter.print(f"\tuse [item 1] with [item 2]")
+    SlowPrinter.print("\t\tCombines two items from your inventory, usually crafting them into a third output "
+                      "item.\n\t\tItems can be written in either order"
+                      "\n\t\tExample: use rock with rock")
+    SlowPrinter.print("\tuse [item] on [feature]")
+    SlowPrinter.print("\t\tUses an item on a feature in the area you're currently in.")
     

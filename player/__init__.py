@@ -1,6 +1,7 @@
 import consts.player
 import parsing
 import recipe
+from os import system
 from ui.output import PrintableObject, SlowPrinter
 
 
@@ -30,7 +31,6 @@ class Player(PrintableObject):
         to_return += f"Coords: {self.coordinates}\n"
         to_return += self.display_inventory()
         return to_return
-    
     
     def get_item(self, item: str, amount: int = 1) -> None:
         if item not in self.inventory:
@@ -68,9 +68,12 @@ class Player(PrintableObject):
             SlowPrinter.print("Cannot go further West")
             self.coordinates[1] = 0
         
-        
-        
         self.enter(self.wilderness[self.coordinates])
+    
+    def do_action_command(self, action):
+        if action not in consts.actions:
+            return None
+        return consts.actions[action](self)
     
     def do_usage_command(self, item, feature):
         SlowPrinter.print(f"Using {item} on {feature}")
@@ -83,29 +86,27 @@ class Player(PrintableObject):
             return
         result = recipe.usage.get(self, item, feature)
         if result == None:
-            SlowPrinter.print(f"Error: {item} cannot be used with {feature}")
+            SlowPrinter.print(f"Error: {item} cannot be used on {feature}")
         if isinstance(result, str):
             SlowPrinter.print(f"Recieved {result}")
             self.get_item(result)
-        
-        
     
     def do_item_combine_command(self, *items):
-        SlowPrinter.print(f"Combining {items[0]} with {items[1]}")
+        initial_inventory = self.inventory.copy()
+        SlowPrinter.print(f"Using {items[0]} with {items[1]}")
         gots = self.spend_item(items[0]), self.spend_item(items[1])
         if not all(gots):
-            self.get_item(items[0])
-            self.get_item(items[1])
             SlowPrinter.print("Error: Insufficient materials")
+            self.inventory = initial_inventory
             return
         result = recipe.crafting.get(self, *items)
         if result == None:
-            SlowPrinter.print(f"Error: {items[0]} cannot be combined with {items[1]}")
+            SlowPrinter.print(f"Error: {items[0]} cannot be used with {items[1]}")
+            self.inventory = initial_inventory
             return
         if isinstance(result, str):
             SlowPrinter.print(f"Recieved {result}")
             self.get_item(result)
-        
     
     def do_move_command(self, direction: consts.Direction):
         SlowPrinter.print(f"Moving {direction.value}")
@@ -121,6 +122,8 @@ class Player(PrintableObject):
         command_type = parsed_command[0]
         command_args = parsed_command[1:]
         match command_type:
+            case parsing.CommandClassification.ACTION:
+                return self.do_action_command(command)
             case parsing.CommandClassification.USAGE:
                 return self.do_usage_command(*command_args)
             case parsing.CommandClassification.ITEM_COMBINE:
@@ -136,5 +139,3 @@ class Player(PrintableObject):
         
         command = SlowPrinter.linput("Enter command:\n")
         return self.do_command(command)
-        
-        

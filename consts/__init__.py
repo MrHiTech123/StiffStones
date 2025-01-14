@@ -31,9 +31,16 @@ coordinate_adjusts = {
 heat_conversion = 5 / 2
 
 # Set to false for debug purposes
-slow_print_at_all = False
+slow_print_at_all = True
 slow_print_delay = 0.03
 quick_print_delay = 0.01
 cheating_threshold = 0.05
 
 knapping_threshold = 1
+
+def simple(result: str):
+    return lambda x: result
+actions = {
+    'exit': simple('exit')
+}
+

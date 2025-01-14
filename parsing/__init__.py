@@ -16,7 +16,9 @@ class CommandClassification(Enum):
 def classify_command(command: str) -> CommandClassification:
     """Classifies a command into one of many categories so that it can be later parsed"""
     # If it matches the regex "use \S* on \S+":
-    if re.match('use \\S+ on \\S+', command):
+    if command in consts.actions:
+        return CommandClassification.ACTION
+    elif re.match('use \\S+ on \\S+', command):
         return CommandClassification.USAGE
     elif re.match('use \\S+ with \\S+', command):
         return CommandClassification.ITEM_COMBINE
@@ -36,7 +38,10 @@ def parse_item_combine_command(command: str) -> tuple:
 
 def parse_move_command(command: str) -> tuple:
     words = command.split()
-    return CommandClassification.MOVE, consts.direction_from_string[words[1]]
+    if words[1] in consts.direction_from_string:
+        return CommandClassification.MOVE, consts.direction_from_string[words[1]]
+    else:
+        return CommandClassification.UNKNOWN, command
 
 def parse_unknown_command(command: str) -> tuple:
     return (CommandClassification.UNKNOWN, )

@@ -48,11 +48,11 @@ def run(player) -> bool:
     while True:
         chosen_item = linput()
         if chosen_item == 'exit':
+            player.get_item('rock', 2)
             return False
         if chosen_item in recipe.knapping.registry:
             break
         SlowPrinter.print("Invalid item. Please try again.")
-    
     
     SlowPrinter.input(f"Knapping {chosen_item}. Press {item('Enter')} to begin.")
     
@@ -63,5 +63,7 @@ def run(player) -> bool:
         player.get_item(chosen_item)
     else:
         SlowPrinter.print('Knapping failure')
+    
+    player.get_item('rock')
     
     return to_return
