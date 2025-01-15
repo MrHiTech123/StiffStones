@@ -4,6 +4,15 @@ from ui.output import PrintableObject, SlowPrinter, item, feature
 from random import randint, choice
 
 
+def prune_empty_keys(to_be_pruned: dict[any: int]) -> dict[any: int]:
+    """Removes any items from a dict that have a value of 0"""
+    to_return = to_be_pruned.copy()
+    for k, v in to_be_pruned.items():
+        if v <= 0:
+            to_return.pop(k)
+    return to_return
+
+
 class Area(PrintableObject):
     def __init__(self, wilderness: 'Wilderness', name: str = "unnamed", inventory: dict[str: int] = None,
                  features: dict[str] = None):
@@ -17,18 +26,23 @@ class Area(PrintableObject):
         self.features = features
     
     def north(self, player: Player):
+        """Returns what happens when player moves north from this area"""
         return True
     
     def east(self, player: Player):
+        """Returns what happens when player moves east from this area"""
         return True
     
     def south(self, player: Player):
+        """Returns what happens when player moves south from this area"""
         return True
     
     def west(self, player: Player):
+        """Returns what happens when player moves west from this area"""
         return True
     
-    def move(self, player: Player, direction: consts.Direction):
+    def leave(self, player: Player, direction: consts.Direction):
+        """Returns what happens when player leaves the area"""
         match direction:
             case consts.Direction.NORTH:
                 return self.north(player)
@@ -40,19 +54,21 @@ class Area(PrintableObject):
                 return self.west(player)
     
     def display_inventory(self):
+        """Displays the Area's inventory"""
         to_return = ''
         for item_type, amount in self.inventory.items():
             to_return += f'\t{item(item_type)}\t{amount}\n'
         return to_return
     
     def display_features(self):
+        """Displays the Area's features"""
         to_return = ''
         for feature_type, amount in self.features.items():
             to_return += f"\t{feature(feature_type)}\t{amount}\n"
         return to_return
-        
     
     def be_entered_by(self, player: Player):
+        """What happens when player enters the Area"""
         if self.inventory:
             SlowPrinter.print("This area contains the following items, which you pick up:")
             SlowPrinter.print(self.display_inventory())
@@ -93,7 +109,7 @@ class Area(PrintableObject):
 
 class ClearingArea(Area):
     def __init__(self, wilderness: 'Wilderness'):
-        super().__init__(wilderness, 'Clearing', ClearingArea.random_inventory())
+        super().__init__(wilderness, 'Clearing', ClearingArea.random_inventory(), ClearingArea.random_features())
     
     def be_entered_by(self, player: Player):
         SlowPrinter.print("You enter a grassy clearing.")
@@ -101,10 +117,16 @@ class ClearingArea(Area):
     
     @staticmethod
     def random_inventory():
-        return {
+        return prune_empty_keys({
             'rock': randint(1, 4),
-            'stick': randint(1, 3)
-        }
+            'stick': randint(0, 1)
+        })
+    
+    @staticmethod
+    def random_features():
+        return prune_empty_keys({
+            "tall_grass": randint(0, 1)
+        })
 
 
 class ForestArea(Area):
@@ -117,19 +139,43 @@ class ForestArea(Area):
     
     @staticmethod
     def random_inventory():
-        return {
-            'stick': randint(1, 10)
-        }
+        return prune_empty_keys({
+            'stick': randint(1, 5)
+        })
     
     @staticmethod
     def random_features():
-        return {
+        return prune_empty_keys({
             'tree': randint(1, 4)
-        }
+        })
 
 
-room_types = [ClearingArea, ForestArea]
+class RockyArea(Area):
+    def __init__(self, wilderness: "Wilderness"):
+        super().__init__(wilderness, 'Rocky', RockyArea.random_inventory())
+    
+    def be_entered_by(self, player: Player):
+        SlowPrinter.print("You find yourself on a flat plane of stone that pokes through the surrounding dirt")
+        super().be_entered_by(player)
+    
+    @staticmethod
+    def random_inventory():
+        return prune_empty_keys({
+            'rock': randint(2, 5)
+        })
+
+
+area_weights = {
+    ClearingArea: 3,
+    ForestArea: 2,
+    RockyArea: 1
+}
+
+area_types = []
+for area, count in area_weights.items():
+    for i in range(count):
+        area_types.append(area)
 
 
 def rand_area_type():
-    return choice(room_types)
+    return choice(area_types)

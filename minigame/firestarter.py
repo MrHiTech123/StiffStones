@@ -82,12 +82,12 @@ def run(player) -> bool:
                           "got this message legitimately, hats off to you.)")
         # TODO: Player loses stick
         wait_for_continue()
-        return False
     else:
         SlowPrinter.print("Your hand drill did not reach a high enough temperature this time, "
                 "since it only reached a temperature of {:.2f}°C.".format(highest_temp))
-        return False
-
+    player.get_item('stick')
+    player.get_item('wood')
+    return False
 
 
 if __name__ == '__main__':

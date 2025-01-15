@@ -1,4 +1,4 @@
 
 
-height = 5
-width = 5
+height = 20
+width = 20

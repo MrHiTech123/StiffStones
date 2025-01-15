@@ -8,6 +8,9 @@ def get(player, item_1, item_2):
         return recipes[(item_2, item_1)](player)
     return None
 
+def two_way_in(item_1, item_2):
+    return (item_1, item_2) in recipes or (item_2, item_1) in recipes
+
 def simple(result: str):
     return lambda x: result
 

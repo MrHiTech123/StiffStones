@@ -114,7 +114,7 @@ class Player(PrintableObject):
     
     def do_move_command(self, direction: consts.Direction):
         SlowPrinter.print(f"Moving {direction.value}")
-        if self.get_current_area().move(self, direction):
+        if self.get_current_area().leave(self, direction):
             self.move(direction)
     
     def do_unknown_command(self, command):

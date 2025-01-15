@@ -106,7 +106,7 @@ def test_effects():
     SlowPrinter.print("If any of that didn't happen, your terminal environment is not set up properly for this game.")
 
 
-def tutorial():
+def tutorial(player: "Player"):
     system('clear')
     SlowPrinter.print(f"{item('Green')} text indicates items that can be stored in your inventory, such as {item('rocks')} and {item('sticks')}.\n"
                       f"{feature('Blue')} text indicates features that can be found in areas, such as {feature('trees')} and {feature('campfires')}.\n"
@@ -137,5 +137,6 @@ def tutorial():
     SlowPrinter.print("\t\tThey are always one word and include:")
     SlowPrinter.print("\t\t\thelp - replays this tutorial")
     SlowPrinter.print("\t\t\texit - ends the program")
+    SlowPrinter.print("\t\t\trecipes - gives a list of every recipe you can currently do")
     
     

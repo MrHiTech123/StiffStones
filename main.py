@@ -21,7 +21,7 @@ def main_menu():
                                    "Type 2 for a tutorial.\n"
                                    "Type 3 to confirm that your terminal is set up properly.\n")
         if option == '2':
-            tutorial()
+            tutorial(None)
         elif option == '3':
             test_effects()
         elif option == '1':
