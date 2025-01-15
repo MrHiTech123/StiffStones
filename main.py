@@ -1,7 +1,9 @@
-from ui.output import SlowPrinter, test_effects, tutorial
+from ui.output import SlowPrinter, test_effects
 from wilderness import Wilderness
 from player import Player
+from recipe.actions import tutorial
 import consts
+
 
 
 def main_game():
