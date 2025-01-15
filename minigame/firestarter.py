@@ -5,7 +5,7 @@ from os import system
 import consts
 
 def get_flame_color(heat: int | float) -> tuple[int, int, int]:
-    """Gets the color that the prompt arrow should be, based on the inputted heat"""
+    """Gets the color that the prompt arrow should be, based on the inputted heat out of 255"""
     heat = int(heat)
     return (min(heat * 2, 255), min(heat, 255), 0)
 
@@ -51,13 +51,16 @@ def gameplay() -> int:
     return highest_heat
 
 def heat_to_celsius(heat: float) -> float:
+    """Converts a heat value out of 255, to a temperature in Celsius"""
     return consts.heat_conversion * heat
 
 def reward(player: "Player"):
+    """Add a campfire the player's wilderness at their position"""
     area = player.wilderness[player.coordinates]
     area.add_feature('campfire')
 
-def run(player) -> bool:
+def run(player: "Player") -> bool:
+    """Run the firestarter minigame for a player, return a boolean value of if they made a fire or not"""
     system('clear')
     SlowPrinter.print(f"You make a primitive hand drill. \n"
                       f"To start a fire, rub the wood and stick together by repeatedly pressing the {key('Enter')} key.\n"

@@ -8,6 +8,7 @@ from os import system
 
 
 def knap_one_number(num: int) -> bool:
+    """Knap one number in the pattern, returns whether the player succeeded for that number."""
     print(num)
     start = time()
     input()
@@ -24,6 +25,7 @@ def knap_one_number(num: int) -> bool:
 
 
 def knapping_process(pattern: Collection[int]) -> bool:
+    """Knap each number in succession"""
     for num in pattern:
         success = knap_one_number(num)
         if not success:
@@ -31,16 +33,18 @@ def knapping_process(pattern: Collection[int]) -> bool:
     return True
 
 
-def gameplay(result: str):
+def gameplay(result: str) -> bool:
+    """Get the pattern and then run the knapping minigame for it"""
     pattern = recipe.knapping.registry[result].pattern
     return knapping_process(pattern)
 
 
-def run(player) -> bool:
+def run(player: "Player") -> bool:
+    """Runs the knapping minigame, returns whether the player succeeded"""
     system('clear')
-    # TODO: Tutorial system
     SlowPrinter.print("Welcome to the knapping menu.")
-    needs_help = SlowPrinter.linput(f"Type \"help\" for a tutorial. Type \"exit\" to exit. Otherwise, press {key('Enter')} to continue.\n")
+    needs_help = SlowPrinter.linput(
+        f"Type \"help\" for a tutorial. Type \"exit\" to exit. Otherwise, press {key('Enter')} to continue.\n")
     
     if needs_help == 'help':
         SlowPrinter.print("To knap a stone tool, you must strike the stone precisely.\n"
@@ -54,6 +58,7 @@ def run(player) -> bool:
         player.get_item('rock', 2)
         return False
     
+    # Select item
     SlowPrinter.print("What item would you like to knap? You may choose from:")
     for item_name in recipe.knapping.registry:
         SlowPrinter.print('\t' + item(item_name))
@@ -68,16 +73,21 @@ def run(player) -> bool:
             break
         SlowPrinter.print("Invalid item. Please try again.")
     
+    # Do the minigame
     SlowPrinter.input(f"Knapping {item(chosen_item)}. Press {key('Enter')} to begin.")
     
     to_return = gameplay(chosen_item)
     
+    # If they knapped successfully, give them the item.
     if to_return:
         SlowPrinter.print(f'Successfully knapped {item(chosen_item)}')
         player.get_item(chosen_item)
     else:
         SlowPrinter.print('Knapping failure')
     
+    # The recipe calls for two rocks, since you're banging
+    # one against the other and also that's how crafting recipes work in this.
+    # However, the second rock is a catalyst, so give it back at the end.
     player.get_item('rock')
     
     return to_return

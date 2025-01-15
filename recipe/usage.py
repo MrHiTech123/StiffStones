@@ -11,7 +11,7 @@ def remove_input_feature(result: str, feature: str):
     """Returns a function that removes the feature and returns the result item"""
     
     def to_return(player: "Player"):
-        area = player.wilderness[player.coordinates]
+        area = player.get_current_area()
         area.remove_feature(feature)
         return result
     
