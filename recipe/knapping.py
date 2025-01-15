@@ -28,9 +28,11 @@ for recipe in recipes:
 # I honestly have no idea what is even happening here.
 # I'm honestly not convinced it's actually used becuase how would that even work?
 # There's a string being passed to a list index?
+# I think that's meant to be the registry index, so I'm making that canon now.
+# I don't think this is ever used
 
-def get(result: str) -> tuple[int]:
+def get_my_thin(result: str) -> tuple[int]:
     if result in recipes:
-        return recipes[result]
+        return registry[result]
     else:
         SlowPrinter.print(f"Error: No knapping recipe for {result}")

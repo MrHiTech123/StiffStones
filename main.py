@@ -7,11 +7,13 @@ import consts
 
 
 def main_game():
+    # Make new variables
     wilderness = Wilderness(consts.wilderness.width, consts.wilderness.height)
     name = SlowPrinter.input("Enter your name:\n")
     player = Player(wilderness, [consts.wilderness.width // 2, consts.wilderness.height // 2], name)
     
     while True:
+        # Keep the player in the command loop until they exit.
         command = player.command_prompt()
         if command == 'exit':
             return

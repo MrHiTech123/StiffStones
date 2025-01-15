@@ -47,9 +47,11 @@ def item(text: object) -> str:
     """Makes text light green indicates that the subject of the text is a feature."""
     return colored(text, 0, 255, 0)
 
+
 def feature(text: object) -> str:
     """Makes text light blue, indicates that the subject of the text is a feature."""
     return colored(text, 0, 227, 255)
+
 
 def key(text: object):
     """Makes text yellow, indicates that the subject of the text is a control"""
@@ -57,7 +59,11 @@ def key(text: object):
 
 
 class SlowPrinter:
+    # Set that stores what strings have been printed;
+    # A string gets printed faster by the SlowPrinter if it's been
+    # printed before.
     __printed_strings__: set[str] = set()
+    
     @staticmethod
     def print(*args: object, sep: str = ' ', end: str = '\n') -> None:
         """Print something (or many things) slowly
@@ -72,13 +78,11 @@ class SlowPrinter:
             # Add the string to printed_strings so that it knows not to slow-print it again.
             SlowPrinter.__printed_strings__.add(to_print)
             delay = consts.slow_print_delay
-            
         
         for character in to_print:
             print(character, end='', flush=True)
             if consts.slow_print_at_all:
                 sleep(delay)
-            
     
     @staticmethod
     def input(__prompt: str) -> str:
@@ -92,7 +96,6 @@ class SlowPrinter:
         return SlowPrinter.input(__prompt).lower()
 
 
-
 def test_effects():
     """Confirms to the user that their terminal is set up properly"""
     system('clear')
@@ -104,4 +107,3 @@ def test_effects():
     sleep(1)
     print(consts.escape_code.start_prev_line, end='')
     SlowPrinter.print("If any of that didn't happen, your terminal environment is not set up properly for this game.")
-

@@ -33,7 +33,7 @@ def display_available_recipes(player: "Player"):
     for item_1 in sorted(player.inventory):
         for feat in player.get_current_area().features:
             # Print the combination if it has a recipe
-            if (item_1, feat) in recipe.usage.recipes:
+            if (item_1, feat) in recipe.usage.registry:
                 SlowPrinter.print('\t' + item(item_1) + ', ' + feature(feat))
     SlowPrinter.print()
 

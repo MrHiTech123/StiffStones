@@ -2,6 +2,7 @@ import consts
 from player import Player
 from ui.output import PrintableObject, SlowPrinter, item, feature
 from random import randint, choice
+from typing import Type
 
 
 def prune_empty_keys(to_be_pruned: dict[any: int]) -> dict[any: int]:
@@ -22,8 +23,8 @@ class Area(PrintableObject):
             inventory = {}
         if features == None:
             features = {}
-        self.inventory = inventory
-        self.features = features
+        self.inventory = prune_empty_keys(inventory)
+        self.features = prune_empty_keys(features)
     
     def north(self, player: Player):
         """Returns what happens when player moves north from this area"""
@@ -82,6 +83,7 @@ class Area(PrintableObject):
         return True
     
     def interact(self, player: Player):
+        """Returns what happens if the player interacts with the area; not currently used."""
         return None
     
     def __str__(self):
@@ -117,16 +119,16 @@ class ClearingArea(Area):
     
     @staticmethod
     def random_inventory():
-        return prune_empty_keys({
+        return {
             'rock': randint(1, 4),
             'stick': randint(0, 1)
-        })
+        }
     
     @staticmethod
     def random_features():
-        return prune_empty_keys({
+        return {
             "tall_grass": randint(0, 1)
-        })
+        }
 
 
 class ForestArea(Area):
@@ -139,15 +141,15 @@ class ForestArea(Area):
     
     @staticmethod
     def random_inventory():
-        return prune_empty_keys({
+        return {
             'stick': randint(1, 5)
-        })
+        }
     
     @staticmethod
     def random_features():
-        return prune_empty_keys({
+        return {
             'tree': randint(1, 4)
-        })
+        }
 
 
 class RockyArea(Area):
@@ -160,22 +162,24 @@ class RockyArea(Area):
     
     @staticmethod
     def random_inventory():
-        return prune_empty_keys({
+        return {
             'rock': randint(2, 5)
-        })
+        }
 
-
+# How likely each area type is to exist
 area_weights = {
     ClearingArea: 3,
     ForestArea: 2,
     RockyArea: 1
 }
 
+# Create the list that is used to select random area types
 area_types = []
 for area, count in area_weights.items():
     for i in range(count):
         area_types.append(area)
 
 
-def rand_area_type():
+def rand_area_type() -> Type:
+    """Returns a random area type"""
     return choice(area_types)

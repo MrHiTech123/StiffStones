@@ -2,8 +2,9 @@ from consts import function
 
 
 def get(player: "Player", item: str, feature: str):
-    if (item, feature) in recipes:
-        return recipes[(item, feature)](player)
+    """Get the result item, if there is one, from using an item on a feature"""
+    if (item, feature) in registry:
+        return registry[(item, feature)](player)
     return None
 
 
@@ -23,7 +24,8 @@ def simple(result: str):
     return lambda x: result
 
 
-recipes: dict[tuple[str, str]: function] = {
+# Recipe registry
+registry: dict[tuple[str, str]: function] = {
     ('axe', 'tree'): remove_input_feature('wood', 'tree'),
     ('knife', 'tall_grass'): remove_input_feature('grass', 'tall_grass'),
     ('raw_meat', 'campfire'): simple('cooked_meat')
