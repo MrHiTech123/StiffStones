@@ -95,4 +95,4 @@ def run(player: "Player") -> bool:
 
 
 if __name__ == '__main__':
-    run()
+    run(None)
