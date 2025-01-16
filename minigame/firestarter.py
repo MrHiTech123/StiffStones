@@ -85,7 +85,6 @@ def run(player: "Player") -> bool:
                           "-1 stick.\n"
                           "(This is an anti-cheating measure. If you "
                           "got this message legitimately, hats off to you.)")
-        # TODO: Player loses stick
         wait_for_continue()
     else:
         SlowPrinter.print("Your hand drill did not reach a high enough temperature this time, "
