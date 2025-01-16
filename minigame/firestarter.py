@@ -62,7 +62,7 @@ def reward(player: "Player"):
 def run(player: "Player") -> bool:
     """Run the firestarter minigame for a player, return a boolean value of if they made a fire or not"""
     clear()
-    SlowPrinter.print(f"You make a primitive hand drill. \n"
+    SlowPrinter.print(f"You attempt to start a fire. \n"
                       f"To start a fire, rub the wood and stick together by repeatedly pressing the {key('Enter')} key.\n"
                       f"Be sure to do it quickly so that you can build up enough heat.\n"
                       f"You can also exit at any time by typing \"exit\".")
@@ -79,7 +79,7 @@ def run(player: "Player") -> bool:
     elif highest_heat < 0:
         print(gradient('SNAP!', 128, 128, 64, 64, 64, 32))
         sleep(1)
-        SlowPrinter.print("You rub the stick so quickly that you accidentally break it!\n"
+        SlowPrinter.print("You rub the firestarter so quickly that you accidentally break it!\n"
                           "-1 stick.\n"
                           "(This is an anti-cheating measure. If you "
                           "got this message legitimately, hats off to you.)")
@@ -88,8 +88,8 @@ def run(player: "Player") -> bool:
     else:
         SlowPrinter.print("Your hand drill did not reach a high enough temperature this time, "
                 "since it only reached a temperature of {:.2f}°C.".format(highest_temp))
-    player.get_item('stick')
-    player.get_item('wood')
+        player.get_item('firestarter')
+        player.get_item('wood')
     return False
 
 

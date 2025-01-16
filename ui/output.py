@@ -9,7 +9,7 @@ class PrintableObject():
         return self.__str__()
 
 def clear():
-    print(consts.escape_code.clear_screen)
+    print(consts.escape_code.clear_screen, end="")
 
 def colored(text: object, r: int, g: int, b: int) -> str:
     """Prints text, colored rgb"""
