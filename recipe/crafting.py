@@ -18,9 +18,10 @@ def simple(result: str) -> function:
     return lambda x: result
 
 registry = {
+    ("grass", "stick"): simple("firestarter"),
     ("rock", "rock"): minigame.knapping.run,
     ("stick", "axe_head"): simple("axe"),
     ("stick", "knife_head"): simple("knife"),
     ("stick", "spear_head"): simple("spear"),
-    ("stick", "wood"): minigame.firestarter.run
+    ("firestarter", "wood"): minigame.firestarter.run
 }

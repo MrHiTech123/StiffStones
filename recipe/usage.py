@@ -28,5 +28,6 @@ def simple(result: str):
 registry: dict[tuple[str, str]: function] = {
     ('axe', 'tree'): remove_input_feature('wood', 'tree'),
     ('knife', 'tall_grass'): remove_input_feature('grass', 'tall_grass'),
-    ('raw_meat', 'campfire'): simple('cooked_meat')
+    ('raw_meat', 'campfire'): simple('cooked_meat'),
+    ('spear', 'rabbit'): remove_input_feature('raw_meat', 'rabbit'),
 }

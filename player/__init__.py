@@ -169,3 +169,8 @@ class Player(PrintableObject):
         
         command = SlowPrinter.linput("Enter command:\n")
         return self.do_command(command)
+    
+    def win_condition(self):
+        """Determines if the player has won"""
+        return 'cooked_meat' in self.inventory
+    

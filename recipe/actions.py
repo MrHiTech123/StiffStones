@@ -52,7 +52,7 @@ def tutorial(player: "Player"):
     SlowPrinter.print(f"\tuse {item('[item 1]')} with {item('[item 2]')}")
     SlowPrinter.print("\t\tCombines two items from your inventory, usually crafting them into a third output "
                       "item.\n\t\tExample: \"use rock with rock\""
-                      "\n\t\tItems can be written in either order. \"use axe_head with stick\" will give the \n\t\t"
+                      "\n\t\tItems can be written in either order. \"use axe_head with stick\" will give the \n\t\t\t"
                       "same result as \"use stick with axe_head\".")
     SlowPrinter.print()
     SlowPrinter.print(f"\tuse {item('[item]')} on {feature('[feature]')}")
@@ -75,6 +75,10 @@ def tutorial(player: "Player"):
     SlowPrinter.print("\t\t\thelp - replays this tutorial")
     SlowPrinter.print("\t\t\texit - ends the program")
     SlowPrinter.print("\t\t\trecipes - gives a list of every recipe you can currently do")
+    
+    SlowPrinter.print()
+    SlowPrinter.print("Cook some meat to win the game!")
+    SlowPrinter.print()
 
 # Action "recipe" registry; a command of [key] results in function [value] being run on the player.
 registry = {

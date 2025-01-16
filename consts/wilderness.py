@@ -1,3 +1,3 @@
 # Width and height of the wilderness when generated
-height = 20
-width = 20
+height = 50
+width = 50

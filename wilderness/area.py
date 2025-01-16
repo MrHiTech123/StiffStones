@@ -120,14 +120,16 @@ class ClearingArea(Area):
     @staticmethod
     def random_inventory():
         return {
-            'rock': randint(1, 4),
+            'rock': randint(0, 1),
             'stick': randint(0, 1)
         }
     
     @staticmethod
     def random_features():
         return {
-            "tall_grass": randint(0, 1)
+            "rabbit": choice((0, 0, 1)),
+            "tall_grass": randint(0, 2),
+            "tree": randint(0, 1)
         }
 
 
@@ -148,7 +150,7 @@ class ForestArea(Area):
     @staticmethod
     def random_features():
         return {
-            'tree': randint(1, 4)
+            'tree': randint(4, 8)
         }
 
 
@@ -169,7 +171,7 @@ class RockyArea(Area):
 # How likely each area type is to exist
 area_weights = {
     ClearingArea: 3,
-    ForestArea: 2,
+    ForestArea: 1,
     RockyArea: 1
 }
 
