@@ -1,6 +1,6 @@
 import recipe.crafting
 from consts import function
-from ui.output import SlowPrinter, item, feature, key
+from ui.output import SlowPrinter, item, feature, key, clear
 from os import system
 
 
@@ -24,7 +24,7 @@ def display_available_recipes(player: "Player"):
                     (item_1 == item_2 and player.inventory[item_1] < 2))
             ):
                 # Print the recipe
-                SlowPrinter.print('\t' + item(item_1) + ', ' + item(item_2))
+                SlowPrinter.print(f'\tuse {item(item_1)} with {item(item_2)} -> {recipe.crafting.get_recipe(item_1, item_2).result}')
     
     SlowPrinter.print()
     
@@ -34,13 +34,13 @@ def display_available_recipes(player: "Player"):
         for feat in player.get_current_area().features:
             # Print the combination if it has a recipe
             if (item_1, feat) in recipe.usage.registry:
-                SlowPrinter.print('\t' + item(item_1) + ', ' + feature(feat))
+                SlowPrinter.print(f"\tuse {item(item_1)} on {feature(feat)} -> {recipe.usage.get_recipe(item_1, feat).result}")
     SlowPrinter.print()
 
 
 def tutorial(player: "Player"):
     """Shows the player the tutorial"""
-    system('clear')
+    clear()
     SlowPrinter.print(
         f"{item('Green')} text indicates items that can be stored in your inventory, such as {item('rocks')} and {item('sticks')}.\n"
         f"{feature('Blue')} text indicates features that can be found in areas, such as {feature('trees')} and {feature('campfires')}.\n"

@@ -1,10 +1,9 @@
 import recipe
 from ui.input import linput
-from ui.output import SlowPrinter, key, item
+from ui.output import SlowPrinter, key, item, clear
 from typing import Collection
 from time import time
 import consts
-from os import system
 
 
 def knap_one_number(num: int) -> bool:
@@ -41,7 +40,7 @@ def gameplay(result: str) -> bool:
 
 def run(player: "Player") -> bool:
     """Runs the knapping minigame, returns whether the player succeeded"""
-    system('clear')
+    clear()
     SlowPrinter.print("Welcome to the knapping menu.")
     needs_help = SlowPrinter.linput(
         f"Type \"help\" for a tutorial. Type \"exit\" to exit. Otherwise, press {key('Enter')} to continue.\n")

@@ -8,6 +8,8 @@ class PrintableObject():
     def __repr__(self) -> str:
         return self.__str__()
 
+def clear():
+    print(consts.escape_code.clear_screen)
 
 def colored(text: object, r: int, g: int, b: int) -> str:
     """Prints text, colored rgb"""
@@ -102,7 +104,7 @@ class SlowPrinter:
 
 def test_effects():
     """Confirms to the user that their terminal is set up properly"""
-    system('clear')
+    clear()
     SlowPrinter.print(item('This text should be printed in Green.'))
     SlowPrinter.print(feature("This text should be printed in Light Blue."))
     SlowPrinter.print(key('This text should be printed in Yellow.'))

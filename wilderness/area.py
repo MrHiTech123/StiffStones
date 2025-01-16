@@ -120,8 +120,8 @@ class ClearingArea(Area):
     @staticmethod
     def random_inventory():
         return {
-            'rock': randint(0, 1),
-            'stick': randint(0, 1)
+            'rock': choice((0, 1, 1, 1)),
+            'stick': choice((0, 1, 1, 1))
         }
     
     @staticmethod

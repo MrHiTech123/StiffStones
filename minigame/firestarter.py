@@ -1,6 +1,6 @@
 from time import time, sleep
 from ui.input import enter_press, wait_for_continue
-from ui.output import colored, gradient, SlowPrinter, key
+from ui.output import colored, gradient, SlowPrinter, key, clear
 from os import system
 import consts
 
@@ -61,7 +61,7 @@ def reward(player: "Player"):
 
 def run(player: "Player") -> bool:
     """Run the firestarter minigame for a player, return a boolean value of if they made a fire or not"""
-    system('clear')
+    clear()
     SlowPrinter.print(f"You make a primitive hand drill. \n"
                       f"To start a fire, rub the wood and stick together by repeatedly pressing the {key('Enter')} key.\n"
                       f"Be sure to do it quickly so that you can build up enough heat.\n"
