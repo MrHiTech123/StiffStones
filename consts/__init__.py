@@ -36,7 +36,7 @@ coordinate_adjusts = {
 heat_conversion = 5 / 2
 
 # Set to false for debug purposes
-slow_print_at_all = False
+slow_print_at_all = True
 # How long the slow print delay is the first time a string is printed
 slow_print_delay = 0.03
 # How long the print delay is for a string that has already been printed
