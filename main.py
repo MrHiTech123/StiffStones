@@ -5,14 +5,12 @@ from recipe.actions import tutorial
 import consts
 
 
-
 def main_game():
     # Make new variables
     wilderness = Wilderness(consts.wilderness.width, consts.wilderness.height)
     name = SlowPrinter.input("Enter your name:\n")
     SlowPrinter.print("You wake up in the wilderness with no equipment. You're hungry and want to eat some meat.")
     player = Player(wilderness, [consts.wilderness.width // 2, consts.wilderness.height // 2], name)
-    
     
     while True:
         # Keep the player in the command loop until they exit.

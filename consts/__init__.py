@@ -40,7 +40,7 @@ slow_print_at_all = True
 # How long the slow print delay is the first time a string is printed
 slow_print_delay = 0.03
 # How long the print delay is for a string that has already been printed
-quick_print_delay = 0.01
+quick_print_delay = 0.001
 # How quickly you can press enter in succession before you're considered to be cheating.
 cheating_threshold = 0.05
 

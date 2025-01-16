@@ -68,6 +68,10 @@ class SlowPrinter:
     def print(*args: object, sep: str = ' ', end: str = '\n') -> None:
         """Print something (or many things) slowly
         Works like the print function"""
+        
+        # Add check for consts.quick_print_delay == 0
+        
+        
         # Check if it's in the set. If it is, print it normally.
         to_print = sep.join([str(x) for x in args]) + end
         
