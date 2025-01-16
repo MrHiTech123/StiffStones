@@ -14,7 +14,9 @@ def gameplay() -> int:
     heat = 0
     start = time()
     while time() - start < consts.cheating_threshold:
-        input(colored('', *get_flame_color(heat)))
+        leaving = input(colored('', *get_flame_color(heat)))
+        if leaving == "exit":
+            return False
     
     # Tracks the highest temperature the player got
     highest_heat = 0

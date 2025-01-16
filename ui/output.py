@@ -5,11 +5,15 @@ import consts
 
 
 class PrintableObject():
+    """Makes object print properly if it's in a list"""
     def __repr__(self) -> str:
         return self.__str__()
 
+
 def clear():
+    """Clears file"""
     print(consts.escape_code.clear_screen, end="")
+
 
 def colored(text: object, r: int, g: int, b: int) -> str:
     """Prints text, colored rgb"""
@@ -72,7 +76,6 @@ class SlowPrinter:
         Works like the print function"""
         
         # Add check for consts.quick_print_delay == 0
-        
         
         # Check if it's in the set. If it is, print it normally.
         to_print = sep.join([str(x) for x in args]) + end

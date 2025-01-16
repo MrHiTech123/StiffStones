@@ -43,7 +43,7 @@ def run(player: "Player") -> bool:
     clear()
     SlowPrinter.print("Welcome to the knapping menu.")
     needs_help = SlowPrinter.linput(
-        f"Type \"help\" for a tutorial. Type \"exit\" to exit. Otherwise, press {key('Enter')} to continue.\n")
+        f"Type \"help\" for a knapping tutorial. Type \"exit\" to exit. Otherwise, press {key('Enter')} to continue.\n")
     
     if needs_help == 'help':
         SlowPrinter.print("To knap a stone tool, you must strike the stone precisely.\n"
