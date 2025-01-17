@@ -4,10 +4,12 @@ from ui.output import colored, gradient, SlowPrinter, key, clear
 from os import system
 import consts
 
+
 def get_flame_color(heat: int | float) -> tuple[int, int, int]:
     """Gets the color that the prompt arrow should be, based on the inputted heat out of 255"""
     heat = int(heat)
     return (min(heat * 2, 255), min(heat, 255), 0)
+
 
 def gameplay() -> int:
     """Controls the main gameplay. Returns the highest heat value the player reached."""
@@ -49,17 +51,20 @@ def gameplay() -> int:
         # If the heat is >255, you win.
         if highest_heat >= 255:
             break
-        
+    
     return highest_heat
+
 
 def heat_to_celsius(heat: float) -> float:
     """Converts a heat value out of 255, to a temperature in Celsius"""
     return consts.heat_conversion * heat
 
+
 def reward(player: "Player"):
     """Add a campfire the player's wilderness at their position"""
     area = player.wilderness[player.coordinates]
     area.add_feature('campfire')
+
 
 def run(player: "Player") -> bool:
     """Run the firestarter minigame for a player, return a boolean value of if they made a fire or not"""
@@ -88,7 +93,7 @@ def run(player: "Player") -> bool:
         wait_for_continue()
     else:
         SlowPrinter.print("Your hand drill did not reach a high enough temperature this time, "
-                "since it only reached a temperature of {:.2f}°C.".format(highest_temp))
+                          "since it only reached a temperature of {:.2f}°C.".format(highest_temp))
         player.get_item('firestarter')
         player.get_item('wood')
     return False
